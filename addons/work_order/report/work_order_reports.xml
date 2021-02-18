@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            string="Quotation / Order"
+            id="action_report_work_order"
+            model="work.order"
+            name="work_order.report_workorder2"
+            file="work_order.report_workorder"
+            report_type="qweb-pdf"
+            print_report_name="(
+                (object.state == 'draft' and 'Work Order Quotation - %s' % (object.name)) or
+                ('Work Order - %s' % (object.name)))"
+        />
+    </data>
+</odoo>

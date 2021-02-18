@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_analytic_line_tree" model="ir.ui.view">
+            <field name="name">view.account.analytic.line.tree</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <tree string="Time tracking">
+                    <field name="work_order_id" invisible="1"/>
+                    <field name="date"/>
+                    <field name="account_id"/>
+                    <field name="date_end"/>
+                    <field name="unit_amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_analytic_line_search" model="ir.ui.view">
+            <field name="name">view.account.analytic.line.search</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <search string="Search time tracking">
+                    <filter string="Date start by Month" domain="[]" name="date_start_month"
+                            context="{'group_by':'date'}"/>
+                    <filter string="Date end by Month" domain="[]" name="date_end_month"
+                            context="{'group_by':'date_end'}"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

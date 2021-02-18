@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_employee_form" model="ir.ui.view">
+    <field name="name">view.hr.employee.form</field>
+    <field name="model">hr.employee</field>
+    <field name='inherit_id' ref='hr.view_employee_form'/>
+    <field name="arch" type="xml">
+      <div name="button_box" position="inside">
+        <button name="action_view_employee_smart_button_work_order_view" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+          <field name="employee_smart_button_work_order_view_count" widget="statinfo" string="Work orders"/>
+        </button>
+      </div>
+      <xpath expr="//page[@name='hr_settings']" position="inside">
+        <group groups="work_order.group_employee_warehouse">
+          <group string="Work Orders" name="work_orders">
+            <field name="warehouse_id"/>
+          </group>
+        </group>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

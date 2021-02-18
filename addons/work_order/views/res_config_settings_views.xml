@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="res_config_settings_view_form_work_order" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.inherit.work.order</field>
+    <field name="model">res.config.settings</field>
+    <field name="priority" eval="60"/>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[hasclass('settings')]" position="inside">
+        <div class="app_settings_block" data-string="Work Order" string="Work Order" data-key="work_order" groups="account.group_account_manager">
+
+          <h2>Quality management</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="group_maintenance_type"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="group_maintenance_type"/>
+                <div class="text-muted">
+                  Show the maintenance type.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <h2>Invoicing</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-6 o_setting_box">
+              <div class="o_setting_right_pane">
+                <label for="default_invoice_method" string="Invoice method"/>
+                <div class="text-muted">
+                  Invoice method by default
+                </div>
+
+                <div class="content-group">
+                  <div class="mt16">
+                    <field name="default_invoice_method" class="oe_inline"/>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="group_work_order_category_invoice"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="group_work_order_category_invoice"/>
+                <div class="text-muted">
+                  Invoicing method by category
+                </div>
+                <div class="mt16" attrs="{'invisible': [('group_work_order_category_invoice','=',False)]}">
+                  <div>
+                    <label for="manual_category_invoice" class="col-lg-4 o_light_label"/>
+                    <field name="manual_category_invoice"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <h2>Operations</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="operation_by_default"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label string="Operation by default" for="operation_by_default"/>
+                <div class="text-muted">
+                  This operation will be set when creating the first Time Tracking Line. It will show the same amount that hours have been imputed.
+                </div>
+                <div class="content-group" attrs="{'invisible': [('operation_by_default','=',False)]}">
+                  <div>
+                    <field name="operation_id_default" domain="[('type', '=', 'service'), ('installable', '=', True)]" options="{'no_create_edit': True, 'no_open': True}"/>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <h2>Warehouse</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="group_employee_warehouse"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label string="Employee's warehouse preference" for="group_employee_warehouse"/>
+                <div class="text-muted">
+                  Allow specifying preferred warehouse on employee's form.
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="group_add_remove_product"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="group_add_remove_product"/>
+                <div class="text-muted">
+                  Choose adding or removing products in work orders.
+                </div>
+              </div>
+            </div>
+          </div>
+          <h2>Timesheets and Analytic</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="group_timesheet_work_order"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label string="Timesheets in Work Orders" for="group_timesheet_work_order"/>
+                <div class="text-muted">
+                  Use timesheets in Work Orders.
+                </div>
+              </div>
+
+            </div>
+            <div class="col-xs-12 col-md-6 o_setting_box" attrs="{'invisible': [('group_analytic_accounting', '=', False)]}">
+              <div class="o_setting_right_pane">
+                <label for="work_order_analytic_method" string="Analytic method"/>
+                <div class="text-muted">
+                  Choose an analytic method.
+                </div>
+
+                <div class="content-group">
+                  <div class="mt16">
+                    <field name="work_order_analytic_method" class="oe_inline"/>
+                  </div>
+                  <div class="content-group" attrs="{'invisible': [('work_order_analytic_method','!=', 'default')]}">
+                    <div>
+                      <field name="default_analytic_account_id" class="oe_inline" attrs="{'required': [('work_order_analytic_method','=', 'default')]}" options="{'no_create_edit': True, 'no_open': True}"/>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

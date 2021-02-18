@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="view_quotation_tree" model="ir.ui.view">
+    <field name="name">sale.order.tree</field>
+    <field name="model">sale.order</field>
+    <field name="priority" eval="8"/>
+    <field name="inherit_id" ref="sale.view_quotation_tree"/>
+    <field name="arch" type="xml">
+      <field name="user_id" position="after">
+        <field name="client_order_ref"/>
+      </field>
+    </field>
+  </record>
+</odoo>

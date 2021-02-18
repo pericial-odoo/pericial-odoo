@@ -1,0 +1,2068 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* work_order
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-06 08:37+0000\n"
+"PO-Revision-Date: 2020-10-06 08:37+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: work_order
+#: model:mail.template,report_name:work_order.mail_template_work_order_done
+#: model:mail.template,report_name:work_order.mail_template_work_order_quotation
+msgid "${(object.name or '').replace('/','_')}"
+msgstr ""
+
+#. module: work_order
+#: model:mail.template,subject:work_order.mail_template_work_order_done
+msgid "${object.partner_id.name} Work order done (Ref ${object.name or 'n/a' })"
+msgstr "${object.partner_id.name} Parte de trabajo finalizado (Ref ${object.name or 'n/a' })"
+
+#. module: work_order
+#: model:mail.template,subject:work_order.mail_template_work_order_quotation
+msgid "${object.partner_id.name} Work orders (Ref ${object.name or 'n/a' })"
+msgstr "${object.partner_id.name} Partes de trabajo (Ref ${object.name or 'n/a' })"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "(<i groups=\"work_order.group_add_remove_product\">Remove</i>)"
+msgstr "(<i groups=\"work_order.group_add_remove_product\">Eliminar</i>)"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__state
+msgid "* The 'Quotation' status is used when a user is encoding a new                    and unconfirmed work order.\n"
+"* The 'Confirmed' status is used when a user confirms the work                         order.\n"
+"* The 'In process' status is used to indicate that the work                          order is being done.\n"
+"* The 'To be Invoiced' status is used to generate the invoice                         before or after the work order is done.\n"
+"* The 'Finished' status is set when the work order is                         completed.\n"
+"* The 'Cancelled' status is used when the user cancels the                         work order."
+msgstr "* El estado de \"Presupuesto\" es usado cuando un usuario está configurando un nuevo parte de trabajo sin confirmar.\n"
+"* El estado \"Confirmado\" es usado cuando un usuario confirma el parte de trabajo.\n"
+"* El estado \"En proceso\" es usado para indicar que el parte de trabajo se está llevando a cabo.\n"
+"* El estado \"Para facturar\" es usado para generar la factura antes o después de que el parte de trabajo esté hecho.\n"
+"* El estado \"Finalizado\" se establece cuando el parte de trabajo esta completado.\n"
+"* El estado \"Cancelado\" es usado cuando el usuario cancela el parte de trabajo."
+
+
+#. module: work_order
+#: model:mail.template,body_html:work_order.mail_template_work_order_done
+msgid "<?xml version=\"1.0\"?>\n"
+"<data><p>Dear ${object.partner_id.name},</p>\n"
+"            <p>\n"
+"            Here is your work order done: ${doc_name} <strong>${object.name}</strong>\n"
+"            % if object.origin:\n"
+"            (with reference: ${object.origin} )\n"
+"            % endif\n"
+"            % if object.invoice_method != 'none':\n"
+"            amounting in <strong>${format_amount(object.amount_total, object.pricelist_id.currency_id)}.</strong>\n"
+"            % endif\n"
+"            </p>\n"
+"            <p>Thank you.</p>\n"
+"          </data>"
+msgstr "<?xml version=\"1.0\"?>\n"
+"<data><p>Estimado ${object.partner_id.name},</p>\n"
+"            <p>\n"
+"            Este es su parte de trabajo finalizado: ${doc_name} <strong>${object.name}</strong>\n"
+"            % if object.origin:\n"
+"            (with reference: ${object.origin} )\n"
+"            % endif\n"
+"            % if object.invoice_method != 'none':\n"
+"            con un total de <strong>${format_amount(object.amount_total, object.pricelist_id.currency_id)}.</strong>\n"
+"            % endif\n"
+"            </p>\n"
+"            <p>Gracias.</p>\n"
+"          </data>"
+
+#. module: work_order
+#: model:mail.template,body_html:work_order.mail_template_work_order_quotation
+msgid "<?xml version=\"1.0\"?>\n"
+"<data><p>Dear ${object.partner_id.name}</p>\n"
+"                <p>\n"
+"                Here is your work order ${doc_name} <strong>${object.name}</strong>\n"
+"                % if object.origin:\n"
+"                (with reference: ${object.origin} )\n"
+"                % endif\n"
+"                % if object.invoice_method != 'none':\n"
+"                amounting in <strong>${format_amount(object.amount_total, object.pricelist_id.currency_id)}.</strong>\n"
+"                % endif\n"
+"                </p>\n"
+"                <p>You can reply to this email if you have any questions.</p>\n"
+"                <p>Thank you,</p>\n"
+"            </data>"
+msgstr "<?xml version=\"1.0\"?>\n"
+"<data><p>Estimado ${object.partner_id.name}</p>\n"
+"                <p>\n"
+"                Este es su parte de trabajo ${doc_name} <strong>${object.name}</strong>\n"
+"                % if object.origin:\n"
+"                (con referencia: ${object.origin} )\n"
+"                % endif\n"
+"                % if object.invoice_method != 'none':\n"
+"                con un total de <strong>${format_amount(object.amount_total, object.pricelist_id.currency_id)}.</strong>\n"
+"                % endif\n"
+"                </p>\n"
+"                <p>Puede contestar a este mail si tiene alguna pregunta.</p>\n"
+"                <p>Gracias,</p>\n"
+"            </data>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
+msgstr ""
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<i groups=\"work_order.group_add_remove_product\">(Add)</i>"
+msgstr ""<i groups=\"work_order.group_add_remove_product\">(Añadir)</i>""
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "<span>Reporting</span>"
+msgstr "<span>Informes</span>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "<span>View</span>"
+msgstr "<span>Ver</span>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "<strong class=\"mr8\">to</strong>"
+msgstr "<strong class=\"mr8\">a</strong>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<strong style=\"padding-right: 20px;\">Signed by:</strong>"
+msgstr "<strong style=\"padding-right: 20px;\">Firmado por:</strong>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<strong style=\"padding-right: 80px;\">Total hours</strong>"
+msgstr "<strong style=\"padding-right: 80px;\">Cantidad de horas totales</strong>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<strong>Printing Date:</strong>"
+msgstr "<strong>Fecha de impresión:</strong>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<strong>Products</strong>"
+msgstr "<strong>Productos</strong>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<strong>Services</strong>"
+msgstr "<strong>Servicios</strong>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<strong>Total Without Taxes</strong>"
+msgstr "<strong>Total Sin Impuestos</strong>"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<strong>Total</strong>"
+msgstr ""
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "<strong>Work address:</strong>"
+msgstr "<strong>Dirección del parte de trabajo:</strong>"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__account_analytic_line_ids
+msgid "Account analytic lines"
+msgstr "Imputaciones de tiempo"
+
+#. module: work_order
+#: selection:res.config.settings,work_order_analytic_method:0
+msgid "Account by default"
+msgstr "Cuenta por defecto"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_needaction
+msgid "Action Needed"
+msgstr "Acción Necesaria"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: work_order
+#: selection:work.order.line,type:0
+msgid "Add"
+msgstr "Añadir"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Add a note"
+msgstr "Agregar nota"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Add a product"
+msgstr "Agregar un producto"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Add a section"
+msgstr "Agregar una sección"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Add internal notes..."
+msgstr "Añadir notas internas..."
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Add quotation notes..."
+msgstr "Añadir notas de presupuesto..."
+
+#. module: work_order
+#: model:res.groups,name:work_order.group_add_remove_product
+msgid "Add/Remove products"
+msgstr "Añadir/Eliminar productos"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__work_address_id
+msgid "Address"
+msgstr "Dirección"
+
+#. module: work_order
+#: selection:res.config.settings,default_invoice_method:0
+#: selection:work.order,invoice_method:0
+#: selection:work.order.category,invoice_method:0
+msgid "After Work Order"
+msgstr "Al finalizar el parte de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "All"
+msgstr "Todos"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__manual_category_invoice
+msgid "Allow manual modification"
+msgstr "Permitir modificarlo manualmente"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Allow specifying preferred warehouse on employee's form."
+msgstr "Permitir especificar un albarán preferido en el formulario de empleado."
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__allowed_to_time_tracking
+msgid "Allowed"
+msgstr "Permitido"
+
+#. module: work_order
+#: selection:work.order,priority:0
+msgid "Alta"
+msgstr ""
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__default_analytic_account_id
+#: model:ir.model.fields,field_description:work_order.field_res_partner__analytic_account_id
+#: model:ir.model.fields,field_description:work_order.field_res_users__analytic_account_id
+#: model:ir.model.fields,field_description:work_order.field_work_order__analytic_account_id
+msgid "Analytic Account"
+msgstr "Cuenta analítica"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Línea Analítica"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__work_order_analytic_method
+msgid "Analytic in Work Orders"
+msgstr "Analítica en Partes de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Analytic method"
+msgstr "Método para analítica"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__resp
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Assigned to"
+msgstr "Asignada a"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteo de archivos adjuntos"
+
+#. module: work_order
+#: selection:work.order,priority:0
+msgid "Baja"
+msgstr ""
+
+#. module: work_order
+#: selection:res.config.settings,default_invoice_method:0
+#: selection:work.order,invoice_method:0
+#: selection:work.order.category,invoice_method:0
+msgid "Before Work Order"
+msgstr "Antes de iniciar el parte de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_calendar
+msgid "Calendar"
+msgstr "Calendario"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__product_updatable
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__product_updatable
+msgid "Can Edit Product"
+msgstr "Puede editar producto"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:563
+#: code:addons/work_order/models/work_order.py:563
+#, python-format
+msgid "Can only confirm draft work orders."
+msgstr "Solo se pueden confirmar presupuestos."
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_make_invoice
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Cancel Work Order"
+msgstr "Cancelar parte de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+#: selection:work.order,state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:577
+#: code:addons/work_order/models/work_order.py:577
+#, python-format
+msgid "Cannot cancel finished work orders."
+msgstr "No se pueden cancelar partes de trabajo terminados."
+
+#. module: work_order
+#: model:ir.actions.act_window,name:work_order.work_order_category_action
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__category_ids
+#: model:ir.ui.menu,name:work_order.menu_work_order_category
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_category_form
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_category_tree
+msgid "Categories"
+msgstr "Categorías"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__category_id
+msgid "Category"
+msgstr "Categoría"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__work_order_team_ids
+msgid "Category teams"
+msgstr "Equipos de la categoría"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__group_add_remove_product
+msgid "Choose add or remove product"
+msgstr "Elegir entre añadir o retirar productos"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Choose adding or removing products in work orders."
+msgstr "Elegir entre añadir o retirar productos en partes de trabajo."
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Choose an analytic method."
+msgstr "Elegir un método para analítica."
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__partner_id
+msgid "Choose partner for whom the order             will be invoiced and delivered."
+msgstr "Elija una empresa para la que el pedido será facturado y enviado."
+
+#. module: work_order
+#: model_terms:ir.actions.act_window,help:work_order.work_order_act_window
+msgid "Click to create a new Work Order."
+msgstr "Pulse para crear un nuevo parte de trabajo."
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_partner__client_smart_button_work_order_view_count
+#: model:ir.model.fields,field_description:work_order.field_res_users__client_smart_button_work_order_view_count
+msgid "Client Smart Button Work Order View Count"
+msgstr "Partes de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag__color
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__color
+msgid "Color Index"
+msgstr "Índice de Colores"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__company_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__company_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__company_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__company_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__company_id
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Company"
+msgstr "Compañía"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: work_order
+#: model:ir.ui.menu,name:work_order.menu_work_order_config
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Confirm Work Order"
+msgstr "Confirmar parte de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+#: selection:work.order,state:0
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: work_order
+#: selection:work.order,maintenance_type:0
+msgid "Corrective"
+msgstr "Correctivo"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_service.py:238
+#: code:addons/work_order/models/work_order_service.py:238
+#, python-format
+msgid "Couldn't find a pricelist line matching this                           product and quantity.\n"
+"You have to change either                           the product, the quantity or the pricelist."
+msgstr "No se ha encontrado una línea de tarifa que concuerde con este producto y cantidad.\n"
+"Debe cambiar el producto, la cantidad o la tarifa."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_line.py:339
+#: code:addons/work_order/models/work_order_line.py:339
+#, python-format
+msgid "Couldn't find a pricelist line matching this product and quantity.\n"
+"You have to change either the product, the quantity or the pricelist."
+msgstr "No se ha encontrado una línea de tarifa que concuerde con este producto y cantidad.\n"
+"Debe cambiar el producto, la cantidad o la tarifa."
+
+#. module: work_order
+#: model:ir.actions.act_window,name:work_order.act_work_order_invoice
+#: model_terms:ir.ui.view,arch_db:work_order.view_make_invoice
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Create Invoice"
+msgstr "Crear Factura"
+
+#. module: work_order
+#: selection:res.config.settings,work_order_analytic_method:0
+msgid "Create an account by Partner"
+msgstr "Crear cuenta analítica por cliente"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_make_invoice
+msgid "Create invoices"
+msgstr "Crear facturas"
+
+#. module: work_order
+#: selection:product.template,work_order_tracking:0
+msgid "Create one work order per sale order"
+msgstr "Crear un parte de trabajo por cada pedido de venta"
+
+#. module: work_order
+#: selection:product.template,work_order_tracking:0
+msgid "Create one work order per sale order line"
+msgstr "Crear un parte de trabajo por cada línea de pedidos de venta"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__create_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__create_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__create_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_make_invoice__create_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__create_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__create_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag__create_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__create_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__create_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__create_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_make_invoice__create_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__create_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__create_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag__create_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__currency_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__currency_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__partner_id
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: work_order
+#: model:ir.actions.act_window,name:work_order.work_order_dashboard_action
+msgid "Dashboard"
+msgstr "Tablero"
+
+#. module: work_order
+#: model:ir.ui.menu,name:work_order.menu_work_order_dashboard
+msgid "Dashoard"
+msgstr "Tablero"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_account_analytic_line_search
+msgid "Date end by Month"
+msgstr "Fecha final por mes"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_account_analytic_line_search
+msgid "Date start by Month"
+msgstr "Fecha inicial por mes"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__name
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__name
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Description"
+msgstr "Descripción"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__location_dest_id
+msgid "Dest. Location"
+msgstr "Ubicación destino"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__display_name
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__display_name
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__display_name
+#: model:ir.model.fields,field_description:work_order.field_work_order_make_invoice__display_name
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__display_name
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__display_name
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag__display_name
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__display_type
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__display_type
+msgid "Display Type"
+msgstr "Tipo de pantalla"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_make_invoice
+msgid "Do you really want to create the invoice(s)?"
+msgstr "¿Desea crear la(s) factura(s)?"
+
+#. module: work_order
+#: selection:product.template,work_order_tracking:0
+msgid "Don't create work order"
+msgstr "No crear partes de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Done"
+msgstr "Hecho"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_account_analytic_line__unit_amount
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Duration"
+msgstr "Duración"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Effective Date"
+msgstr "Fecha efectiva"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__date_finished
+msgid "Effective finish date"
+msgstr "Fecha final efectiva"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__date_start
+msgid "Effective start date"
+msgstr "Fecha comienzo efectiva"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_hr_employee
+#: model:ir.model.fields,field_description:work_order.field_account_analytic_line__employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_hr_employee__employee_smart_button_work_order_view_count
+msgid "Employee Smart Button Work Order View Count"
+msgstr ""
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__group_employee_warehouse
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+#: model:res.groups,name:work_order.group_employee_warehouse
+msgid "Employee's warehouse preference"
+msgstr "Almacén preferido de empleado"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__employee_ids
+msgid "Employees"
+msgstr "Empleados"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "End Work Order"
+msgstr "Finalizar parte de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_account_analytic_line__date_end
+msgid "End date"
+msgstr "Fecha final"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__duration_expected
+msgid "Expected Duration"
+msgstr "Duración esperada"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__duration_expected
+msgid "Expected duration (in hours)"
+msgstr "Duración prevista (en horas)"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Final date"
+msgstr "Cargos"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__finished
+#: selection:work.order,state:0
+msgid "Finished"
+msgstr "Terminado"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__fiscal_position_id
+msgid "Fiscal Position"
+msgstr "Posición fiscal"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Empresas)"
+
+#. module: work_order
+#: sql_constraint:work.order.line:0
+#: sql_constraint:work.order.service:0
+msgid "Forbidden values on non-accountable work order line"
+msgstr "Valores prohiibidos en la linea del parte del trabajo virtual"
+
+#. module: work_order
+#: selection:work.order,invoice_status:0
+#: selection:work.order.line,invoice_status:0
+#: selection:work.order.service,invoice_status:0
+msgid "Fully Invoiced"
+msgstr "Facturado"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Future Activities"
+msgstr "Actividades futuras"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_product_product__installable
+#: model:ir.model.fields,field_description:work_order.field_product_template__installable
+msgid "Generates work orders"
+msgstr "Genera partes de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_make_invoice__group
+msgid "Group by partner invoice address"
+msgstr "Agrupar por dirección de facturación"
+
+#. module: work_order
+#: model:ir.module.category,description:work_order.module_work_order_category
+msgid "Helps you handle your work order security."
+msgstr "Le ayuda a gestionar la seguridad de sus partes de trabajo."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:213
+#: code:addons/work_order/models/work_order.py:213
+#, python-format
+msgid "High"
+msgstr "Alta"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "History"
+msgstr "Historial"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__id
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__id
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__id
+#: model:ir.model.fields,field_description:work_order.field_work_order_make_invoice__id
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__id
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__id
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag__id
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__id
+msgid "ID"
+msgstr ""
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__message_unread
+msgid "If checked new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+#: selection:work.order,state:0
+msgid "In process"
+msgstr "En proceso"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__internal_notes
+msgid "Internal Notes"
+msgstr "Notas internas"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__move_id
+msgid "Inventory Move"
+msgstr "Movimiento de inventario"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__invoice_count
+msgid "Invoice Count"
+msgstr "Recuento de facturas"
+
+#. module: work_order
+#: selection:work.order,state:0
+msgid "Invoice Exception"
+msgstr "Excepción de factura"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Linea de Factura"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__invoice_lines
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__invoice_lines
+msgid "Invoice Lines"
+msgstr "Líneas de factura"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__default_invoice_method
+#: model:ir.model.fields,field_description:work_order.field_work_order__invoice_method
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__invoice_method
+msgid "Invoice Method"
+msgstr "Método de facturación"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__invoice_status
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__invoice_status
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__invoice_status
+msgid "Invoice Status"
+msgstr "Estado factura"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "Invoice address:"
+msgstr "Dirección de facturación:"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Invoice except"
+msgstr "Excepción de factura"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Invoice method"
+msgstr "Método de facturación"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Invoice method by default"
+msgstr "Método de facturación por defecto"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__invoiced
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__invoiced
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__invoiced
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Invoiced"
+msgstr "Facturado"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__qty_invoiced
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__qty_invoiced
+msgid "Invoiced Quantity"
+msgstr "Cantidad Facturada"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__invoice_ids
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Invoices"
+msgstr "Facturas"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Invoicing"
+msgstr "Contabilidad"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__partner_invoice_id
+msgid "Invoicing Address"
+msgstr "Dirección de facturación"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "Invoicing and shipping address:"
+msgstr "Dirección de facturación y de envío:"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Invoicing method by category"
+msgstr "Método de facturación por categoría"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__group_work_order_category_invoice
+msgid "Invoicing per category"
+msgstr "Facturación por categoría"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_is_follower
+msgid "Is Follower"
+msgstr "Es un seguidor"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order____last_update
+#: model:ir.model.fields,field_description:work_order.field_work_order_category____last_update
+#: model:ir.model.fields,field_description:work_order.field_work_order_line____last_update
+#: model:ir.model.fields,field_description:work_order.field_work_order_make_invoice____last_update
+#: model:ir.model.fields,field_description:work_order.field_work_order_service____last_update
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature____last_update
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag____last_update
+#: model:ir.model.fields,field_description:work_order.field_work_order_team____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__write_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__write_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__write_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_make_invoice__write_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__write_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__write_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag__write_uid
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__write_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__write_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__write_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_make_invoice__write_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__write_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__write_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag__write_date
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__last_signature
+msgid "Last signature"
+msgstr "Última firma"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Late Activities"
+msgstr "Actividades tardías"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__lot_id_text
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__lot_id
+msgid "Lot/Serial"
+msgstr "Lote/Nº de serie"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:213
+#: code:addons/work_order/models/work_order.py:213
+#, python-format
+msgid "Low"
+msgstr "Baja"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjuntos principales"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__maintenance_type
+msgid "Maintenance Type"
+msgstr "Tipos de mantenimiento"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_work_order_make_invoice
+msgid "Make Invoice"
+msgstr "Crear factura"
+
+#. module: work_order
+#: model:res.groups,name:work_order.group_work_order_category_invoice
+msgid "Manage invoicing per category"
+msgstr "Gestionar facturación por categoría"
+
+#. module: work_order
+#: model:res.groups,name:work_order.group_work_order_manager
+msgid "Manager"
+msgstr "Responsable"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__manual_category_invoice
+msgid "Manual Category Invoice"
+msgstr "Permitir modificación manual"
+
+#. module: work_order
+#: selection:work.order,priority:0
+msgid "Media"
+msgstr ""
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:213
+#: code:addons/work_order/models/work_order.py:213
+#, python-format
+msgid "Medium"
+msgstr "Media"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de Envío de Mensaje"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: work_order
+#: sql_constraint:work.order.line:0
+#: sql_constraint:work.order.service:0
+msgid "Missing required fields on accountable work order line."
+msgstr "Faltan campos obligatorios en la línea completa del parte de trabajo."
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__move_id
+msgid "Move"
+msgstr "Asiento"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__move_id
+msgid "Move created by the work order"
+msgstr "Movimiento creado por un parte de trabajo"
+
+#. module: work_order
+#: selection:work.order,priority:0
+msgid "Muy alta"
+msgstr ""
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "My Activities"
+msgstr "Mis actividades"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "My Work Orders"
+msgstr "Mis partes de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__name
+#: model:ir.model.fields,field_description:work_order.field_work_order_tag__name
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:30
+#: code:addons/addons/work_order/work_order/models/work_order.py:957
+#: code:addons/addons/work_order/work_order/models/work_order.py:961
+#: code:addons/addons/work_order/work_order/models/work_order.py:963
+#: code:addons/work_order/models/work_order.py:30
+#: code:addons/work_order/models/work_order.py:957
+#: code:addons/work_order/models/work_order.py:961
+#: code:addons/work_order/models/work_order.py:963
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Siguiente plazo de actividad"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la siguiente actividad"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: work_order
+#: selection:res.config.settings,default_invoice_method:0
+#: selection:work.order,invoice_method:0
+#: selection:work.order.category,invoice_method:0
+msgid "No Invoice"
+msgstr "Sin factura"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_line.py:315
+#: code:addons/addons/work_order/work_order/models/work_order_service.py:225
+#: code:addons/work_order/models/work_order_line.py:315
+#: code:addons/work_order/models/work_order_service.py:225
+#, python-format
+msgid "No Pricelist!"
+msgstr "¡Sin tarifa!"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_service.py:237
+#: code:addons/work_order/models/work_order_service.py:237
+#, python-format
+msgid "No valid pricelist line found !"
+msgstr "¡No se ha encontrado una línea de tarifa válida!"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_line.py:338
+#: code:addons/work_order/models/work_order_line.py:338
+#, python-format
+msgid "No valid pricelist line found."
+msgstr "No se ha encontrado una tarifa válida."
+
+#. module: work_order
+#: selection:res.config.settings,work_order_analytic_method:0
+msgid "None"
+msgstr "Ninguno"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/wizard/work_order_make_invoice.py:28
+#: code:addons/work_order/wizard/work_order_make_invoice.py:28
+#, python-format
+msgid "None of the selected work orders are invoiceable."
+msgstr "Ninguno de los partes seleccionables es facturable."
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+#: selection:work.order.line,display_type:0
+#: selection:work.order.service,display_type:0
+msgid "Note"
+msgstr "Nota"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__notes
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Notes"
+msgstr "Notas"
+
+#. module: work_order
+#: selection:work.order,invoice_status:0
+#: selection:work.order.line,invoice_status:0
+#: selection:work.order.service,invoice_status:0
+msgid "Nothing to Invoice"
+msgstr "Nada que Facturar"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_has_error_counter
+msgid "Number of error"
+msgstr "Número de error"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leidos"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__todo_work_order_count
+msgid "Number of work orders"
+msgstr "Número de partes de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__todo_work_order_count_high_priority
+msgid "Number of work orders in high priority"
+msgstr "Número de partes de trabajo con alta prioridad"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__todo_work_order_count_date
+msgid "Number of work orders scheduled"
+msgstr "Número de partes de trabajo planificados"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__todo_count_2binvoiced
+msgid "Number of work orders to be invoiced"
+msgstr "Número de partes de trabajo para facturar"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__todo_work_order_count_unscheduled
+msgid "Number of work orders unscheduled"
+msgstr "Número de partes de trabajo sin planificar"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__operation_by_default
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__operation_id_default
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Operation by default"
+msgstr "Operación por defecto"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Operations"
+msgstr "Operaciones"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__origin_document
+msgid "Origin Document"
+msgstr "Documento origen"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Other Information"
+msgstr "Otra información"
+
+#. module: work_order
+#: selection:work.order,activity_state:0
+msgid "Overdue"
+msgstr "Atrasada"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: work_order
+#: selection:work.order,activity_state:0
+msgid "Planned"
+msgstr "Panificada"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Planned Date"
+msgstr "Fecha planificada"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:650
+#: code:addons/work_order/models/work_order.py:650
+#, python-format
+msgid "Please define an accounting sales journal for this company."
+msgstr "Defina un diario de ventas de contabilidad para esta empresa."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_line.py:357
+#: code:addons/addons/work_order/work_order/models/work_order_service.py:287
+#: code:addons/work_order/models/work_order_line.py:357
+#: code:addons/work_order/models/work_order_service.py:287
+#, python-format
+msgid "Please define income account for this product: \"%s\" (id:%d) - or for its category: \"%s\"."
+msgstr "Por favor defina la cuenta de ingresos para este producto: "%s" (id:%d) o su categoría: "%s"."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:915
+#: code:addons/addons/work_order/work_order/models/work_order.py:920
+#: code:addons/addons/work_order/work_order/models/work_order.py:923
+#: code:addons/addons/work_order/work_order/models/work_order.py:940
+#: code:addons/addons/work_order/work_order/models/work_order.py:943
+#: code:addons/addons/work_order/work_order/models/work_order.py:992
+#: code:addons/work_order/models/work_order.py:915
+#: code:addons/work_order/models/work_order.py:920
+#: code:addons/work_order/models/work_order.py:923
+#: code:addons/work_order/models/work_order.py:940
+#: code:addons/work_order/models/work_order.py:943
+#: code:addons/work_order/models/work_order.py:992
+#, python-format
+msgid "Please, select a valid expected duration"
+msgstr "Por favor, seleccione una duración válida."
+
+#. module: work_order
+#: selection:work.order,maintenance_type:0
+msgid "Preventive"
+msgstr "Preventivo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "Price"
+msgstr "Precio"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__pricelist_id
+msgid "Pricelist"
+msgstr "Tarifa"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Print Quotation"
+msgstr "Imprimir presupuesto"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__priority
+msgid "Priority"
+msgstr "Prioridad"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_product_product
+#: model:ir.model.fields,field_description:work_order.field_work_order__product_parts
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__product_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__product_parts_qty
+msgid "Product Quantity"
+msgstr "Cantidad producto"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__product_uom
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__product_uom
+msgid "Product Unit of Measure"
+msgstr "Unidad de medida del producto"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Product information"
+msgstr "Información de producto"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__work_order_lines
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Products"
+msgstr "Productos"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Quality management"
+msgstr "Gestión de calidad"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__product_uom_qty
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__product_uom_qty
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: work_order
+#: selection:work.order,state:0
+msgid "Quotation"
+msgstr "Presupuesto"
+
+#. module: work_order
+#: model:ir.actions.report,name:work_order.action_report_work_order
+msgid "Quotation / Order"
+msgstr "Presupuesto / Pedido"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__quotation_notes
+msgid "Quotation Notes"
+msgstr "Notas del presupuesto"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Quotations"
+msgstr "Presupuestos"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__duration
+msgid "Real Duration"
+msgstr "Duración real"
+
+#. module: work_order
+#: selection:work.order.line,type:0
+msgid "Remove"
+msgstr "Eliminar"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_sale_order
+msgid "Sale Order"
+msgstr "Expediente"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__sale_order_id
+msgid "Sale order"
+msgstr "Pedido de venta"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Sales Information"
+msgstr "Información de ventas"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__user_id
+msgid "Sales Manager"
+msgstr "Responsable comercial"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__team_id
+msgid "Sales Team"
+msgstr "Equipo de ventas"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "Scheduled"
+msgstr "Planificado"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__date_planned_finished
+msgid "Scheduled Date Finished"
+msgstr "Fecha programada de finalización"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__date_planned_start
+msgid "Scheduled Date Start"
+msgstr "Fecha programada de comienzo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Search Work Order"
+msgstr "Buscar parte de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_account_analytic_line_search
+msgid "Search time tracking"
+msgstr "Buscar seguimiento de tiempo"
+
+#. module: work_order
+#: selection:work.order.line,display_type:0
+#: selection:work.order.service,display_type:0
+msgid "Section"
+msgstr "Sección"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Section Name (eg. Products, Services)"
+msgstr "Nombre de la sección (p. ej., productos, servicios)"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:987
+#: code:addons/work_order/models/work_order.py:987
+#, python-format
+msgid "Select a expected duration."
+msgstr "Selecciona una duración."
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_res_config_settings__default_invoice_method
+#: model:ir.model.fields,help:work_order.field_work_order__invoice_method
+msgid "Selecting 'Before Work Order' or 'After Work Order' will                 allow you to generate invoice before or after the work order                  is done respectively. 'No invoice' means you don't want                  to generate invoice for this work order."
+msgstr "Seleccionando 'Antes del parte de trabajo' o Después del parte de trabajo' permitirá generar las facturas antes o después de que se realice el parte de trabajo respectivamente. 'Sin factura' significa que no quiere generar factura para este parte de trabajo."
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order_category__invoice_method
+msgid "Selecting 'Before Work Order' or 'After Work Order' will             allow you to generate invoice before or after the work order              is done respectively. 'No invoice' means you don't want              to generate invoice for this work order."
+msgstr "Seleccionando 'Antes del parte de trabajo' o Después del parte de trabajo' permitirá generar las facturas antes o después de que se realice el parte de trabajo respectivamente. 'Sin factura' significa que no quiere generar factura para este parte de trabajo."
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Send Quotation"
+msgstr "Enviar presupuesto"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Send work order done"
+msgstr "Enviar parte de trabajo finalizado"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__sequence
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_line.py:228
+#: code:addons/work_order/models/work_order_line.py:228
+#, python-format
+msgid "Serial number is required for                 operation line with product '%s'"
+msgstr "Se requiere un nº de serie para la línea de operación con el producto '%s'"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__service_lines
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Services"
+msgstr "Servicios"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Set to Draft"
+msgstr "Establecer a borrador"
+
+#. module: work_order
+#: model:ir.actions.act_window,name:work_order.work_order_settings_action
+#: model:ir.ui.menu,name:work_order.menu_work_order_settings
+msgid "Settings"
+msgstr "Ajustes"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Show all records which has next action date is before today"
+msgstr "Mostrar todos los registros que tienen la próxima fecha de acción antes de hoy"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__group_maintenance_type
+msgid "Show maintenance type"
+msgstr "Mostrar tipo de mantenimiento"
+
+#. module: work_order
+#: model:res.groups,name:work_order.group_maintenance_type
+msgid "Show the maintenance type"
+msgstr "Mostrar el tipo de mantenimiento"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Show the maintenance type."
+msgstr "Mostrar los tipos de mantenimiento"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_account_analytic_line__signature_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__signature
+msgid "Signature"
+msgstr "Firma"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_signature__signed_by
+msgid "Signed by"
+msgstr "Firmado por"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__location_id
+msgid "Source Location"
+msgstr "Ubicación de origen"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Start Work Order"
+msgstr "Iniciar parte de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_account_analytic_line__date_start
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Start date"
+msgstr "Fecha de inicio"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__state
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__state
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__state
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Status"
+msgstr "Estado"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr "Estado basado en actividades\n"
+"Vencida: la fecha tope ya ha pasado\n"
+"Hoy: La fecha tope es hoy\n"
+"Planificada: futuras actividades."
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__price_subtotal
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__price_subtotal
+msgid "Subtotal"
+msgstr ""
+
+#. module: work_order
+#: model:ir.actions.act_window,name:work_order.work_order_tag_action
+#: model:ir.model.fields,field_description:work_order.field_work_order__tag_ids
+#: model:ir.ui.menu,name:work_order.menu_work_order_tag
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_tag_form
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_tag_tree
+msgid "Tags"
+msgstr "Etiquetas"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__amount_tax
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__tax_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__tax_id
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__work_order_team_id
+msgid "Team"
+msgstr "Equipo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__member_ids
+msgid "Team members"
+msgstr "Miembros del equipo"
+
+#. module: work_order
+#: model:ir.actions.act_window,name:work_order.work_order_team_action
+#: model:ir.actions.act_window,name:work_order.work_order_team_settings_action
+#: model:ir.model.fields,field_description:work_order.field_work_order_category__team_ids
+#: model:ir.ui.menu,name:work_order.menu_work_order_team
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_team
+msgid "Teams"
+msgstr "Equipos"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order_line__display_type
+#: model:ir.model.fields,help:work_order.field_work_order_service__display_type
+msgid "Technical field for UX purpose."
+msgstr "Campo técnico para propósitos UX"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order_line__state
+#: model:ir.model.fields,help:work_order.field_work_order_service__state
+msgid "The status of a work order line is set automatically to the one              of the linked work order."
+msgstr "El estado de una operación se establece automáticamente a partir de su parte de trabajo"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:731
+#: code:addons/addons/work_order/work_order/models/work_order.py:737
+#: code:addons/work_order/models/work_order.py:731
+#: code:addons/work_order/models/work_order.py:737
+#, python-format
+msgid "There is no invoiceable line."
+msgstr "No hay líneas a facturar."
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "This operation will be set when creating the first Time Tracking Line. It will show the same amount that hours have been imputed."
+msgstr "Esta operación se añadirá con la primera imputación de seguimiento de tiempo.\n"
+"                      Mostrará la misma cantidad que horas hayan sido imputadas."
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_res_config_settings__group_add_remove_product
+msgid "This option allows to choose if adding or removing products in work order lines."
+msgstr "Esta opción permite elegir entre añadir o retirar productos en las lineas de los partes de trabajo."
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_res_config_settings__group_work_order_category_invoice
+msgid "This option will change the invoice method when category is modified."
+msgstr "Esta opción modificará el método de facturación cuando la categoría cambie."
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__time_ids
+msgid "Time"
+msgstr "Tiempo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Time Tracking"
+msgstr "Seguimiento de tiempo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_hr_employee__time_tracking_ids
+#: model_terms:ir.ui.view,arch_db:work_order.view_account_analytic_line_tree
+msgid "Time tracking"
+msgstr "Seguimiento de tiempo"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_work_order_signature
+msgid "Time tracking signature"
+msgstr "Firma de seguimiento de tiempo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Timesheets and Analytic"
+msgstr "Partes de horas y Analítica"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Timesheets in Work Orders"
+msgstr "Partes de horas en Partes de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "To Do"
+msgstr "Por hacer"
+
+#. module: work_order
+#: selection:work.order,invoice_status:0
+#: selection:work.order.line,invoice_status:0
+#: selection:work.order.service,invoice_status:0
+msgid "To Invoice"
+msgstr "A facturar"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__qty_to_invoice
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__qty_to_invoice
+msgid "To Invoice Quantity"
+msgstr "Cantidad a Facturar"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+#: selection:work.order,state:0
+msgid "To be Invoiced"
+msgstr "Para ser facturado"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "To be invoiced"
+msgstr "Para ser facturado"
+
+#. module: work_order
+#: selection:work.order,activity_state:0
+msgid "Today"
+msgstr "Hoy"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Today Activities"
+msgstr "Actividades de Hoy"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+msgid "Today Work Orders"
+msgstr "Partes de trabajo de hoy"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "Top Priorities"
+msgstr "Principales prioridades"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__amount_total
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_tree
+msgid "Total"
+msgstr ""
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Total amount"
+msgstr "Importe total"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_stock_traceability_report
+msgid "Traceability Report"
+msgstr "Informe de trazabilidad"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__price_unit
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__price_unit
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "Unit Price"
+msgstr "Precio unitario"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes por leer"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de mensajes sin leer"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_search
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+msgid "Unscheduled"
+msgstr "No programado"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__unsigned_due_hours
+msgid "Unsigned hours"
+msgstr "Horas no firmadas"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__unsigned_due_hours
+msgid "Unsigned time tracking's entries due hours"
+msgstr "Horas no firmadas"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__amount_untaxed
+msgid "Untaxed Amount"
+msgstr "Base imponible"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Untaxed amount"
+msgstr "Base imponible"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "UoM"
+msgstr "UdM"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Use timesheets in Work Orders."
+msgstr "Usar Partes de horas en los Partes de trabajo"
+
+#. module: work_order
+#: model:res.groups,name:work_order.group_timesheet_work_order
+msgid "Use timesheets on Work Orders"
+msgstr "Usar Partes de horas en los Partes de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_res_config_settings__group_timesheet_work_order
+msgid "Use timesheets on work orders"
+msgstr "Usar Partes de horas en los Partes de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_kanban
+#: model:res.groups,name:work_order.group_work_order_user
+msgid "User"
+msgstr "Usuario"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:213
+#: code:addons/work_order/models/work_order.py:213
+#, python-format
+msgid "Very High"
+msgstr "Muy alta"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_hr_employee__warehouse_id
+#: model:ir.model.fields,field_description:work_order.field_work_order__warehouse_id
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/account_analytic_line.py:52
+#: code:addons/work_order/models/account_analytic_line.py:52
+#, python-format
+msgid "Warning! End date is already due."
+msgstr "¡Cuidado! La fecha final es anterior a la de inicio."
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__guarantee_limit
+msgid "Warranty Expiration"
+msgstr "Vencimiento de la garantía"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: work_order
+#: model:ir.model.fields,help:work_order.field_work_order__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: work_order
+#: model:ir.actions.act_window,name:work_order.work_order_act_window
+#: model:ir.model,name:work_order.model_work_order
+#: model:ir.model.fields,field_description:work_order.field_sale_order_line__work_order_id
+#: model:ir.model.fields,field_description:work_order.field_stock_move__work_order_id
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__work_order_ids
+#: model:ir.module.category,name:work_order.module_work_order_category
+#: model:ir.ui.menu,name:work_order.work_order_menu
+#: model:ir.ui.menu,name:work_order.work_order_root
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+#: model_terms:ir.ui.view,arch_db:work_order.res_config_settings_view_form_work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Work Order"
+msgstr "Partes de trabajo"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_work_order_category
+msgid "Work Order Category"
+msgstr "Categoría"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_sale_order__work_order_ids_count
+msgid "Work Order Ids Count"
+msgstr "Número de parte de trabajo"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_work_order_line
+#: model:ir.model.fields,field_description:work_order.field_product_product__work_order_line
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "Work Order Line"
+msgstr "Linea de parte de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_account_invoice_line__work_order_line_ids
+msgid "Work Order Lines"
+msgstr "Líneas del parte de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__name
+#: model:ir.model.fields,field_description:work_order.field_work_order_service__work_order_id
+msgid "Work Order Reference"
+msgstr "Referencia del parte de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_account_invoice_line__work_order_service_ids
+msgid "Work Order Services"
+msgstr "Servicios del parte de trabajo"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_work_order_service
+msgid "Work Order Services Line"
+msgstr "Linea de servicio"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_work_order_tag
+msgid "Work Order Tags"
+msgstr "Etiquetas de parte de trabajo"
+
+#. module: work_order
+#: model:ir.model,name:work_order.model_work_order_team
+msgid "Work Order Team"
+msgstr "Equipo del parte de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_product_product__work_order_tracking
+#: model:ir.model.fields,field_description:work_order.field_product_template__work_order_tracking
+msgid "Work Order Tracking"
+msgstr "Partes de trabajo"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:821
+#: code:addons/work_order/models/work_order.py:821
+#, python-format
+msgid "Work Order must be 'In process' in order to end                 the work order."
+msgstr "El parte de trabajo debe estar 'En proceso' para poder finalizarlo."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:852
+#: code:addons/work_order/models/work_order.py:852
+#, python-format
+msgid "Work Order must be finished in order                 to make the product moves."
+msgstr "El parte de trabajo debe estar terminado para realizar los movimientos de producto."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/account_analytic_line.py:91
+#: code:addons/addons/work_order/work_order/models/work_order_team.py:85
+#: code:addons/work_order/models/account_analytic_line.py:91
+#: code:addons/work_order/models/work_order_team.py:85
+#: model:ir.model.fields,field_description:work_order.field_account_invoice__work_order_ids
+#: model_terms:ir.ui.view,arch_db:work_order.view_employee_form
+#, python-format
+msgid "Work Orders"
+msgstr "Órdenes de trabajo"
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.report_workorder
+msgid "Work Quotation"
+msgstr "Presupuesto del parte de trabajo"
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_account_analytic_line__work_order_id
+#: model:ir.model.fields,field_description:work_order.field_hr_employee__work_order_ids
+#: model:ir.model.fields,field_description:work_order.field_work_order_line__work_order_id
+msgid "Work order"
+msgstr "Parte de trabajo"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:547
+#: code:addons/work_order/models/work_order.py:547
+#, python-format
+msgid "Work order must be cancelled in order to                 reset it to draft."
+msgstr "El parte de trabajo debe estar cancelado para reiniciarlo al estado de borrador."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:792
+#: code:addons/work_order/models/work_order.py:792
+#, python-format
+msgid "Work order must be confirmed before                 starting the work."
+msgstr "El parte de trabajo debe estar confirmado antes de empezar a trabajar."
+
+#. module: work_order
+#: model:ir.model.fields,field_description:work_order.field_work_order__work_order_member_ids
+msgid "Work order team members"
+msgstr "Miembros del equipo del parte de trabajo"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/res_partner.py:26
+#: code:addons/addons/work_order/work_order/models/sale_order.py:24
+#: code:addons/work_order/models/res_partner.py:26
+#: code:addons/work_order/models/sale_order.py:24
+#: model:ir.actions.act_window,name:work_order.action_work_order_calendar
+#: model:ir.actions.act_window,name:work_order.action_work_order_calendar_from_dashboard
+#: model:ir.actions.act_window,name:work_order.action_work_order_reports
+#: model:ir.actions.act_window,name:work_order.action_work_order_tree_from_dashboard
+#: model:ir.model.fields,field_description:work_order.field_res_partner__work_order_ids
+#: model:ir.model.fields,field_description:work_order.field_res_users__work_order_ids
+#: model:ir.model.fields,field_description:work_order.field_sale_order__work_order_ids
+#: model:ir.model.fields,field_description:work_order.field_work_order_team__todo_work_order_ids
+#: model_terms:ir.ui.view,arch_db:work_order.view_employee_form
+#: model_terms:ir.ui.view,arch_db:work_order.view_sale_order_form
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_tree
+#: model_terms:ir.ui.view,arch_db:work_order.work_order_kanban_view
+#, python-format
+msgid "Work orders"
+msgstr "Partes de trabajo"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:951
+#: code:addons/work_order/models/work_order.py:951
+#, python-format
+msgid "You can not delete a work order! You can archieve it."
+msgstr "¡No puedes borrar un parte de trabajo! Puedes archivarlo."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_line.py:384
+#: code:addons/addons/work_order/work_order/models/work_order_service.py:251
+#: code:addons/work_order/models/work_order_line.py:384
+#: code:addons/work_order/models/work_order_service.py:251
+#, python-format
+msgid "You cannot change the type of a work order line. Instead you should delete the current line and create a new line of the proper type."
+msgstr "No puede cambiar la línea del parte de trabajo. En vez de eso, debería borrar la línea actual y crear una nueva línea del tipo correcto."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order.py:698
+#: code:addons/work_order/models/work_order.py:698
+#, python-format
+msgid "You have to select a Partner Invoice Address                     in the work order form!"
+msgstr "¡Tiene que seleccionar una dirección de facturación en el formulario del parte de trabajo!"
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_line.py:316
+#: code:addons/work_order/models/work_order_line.py:316
+#, python-format
+msgid "You have to select a pricelist in the Work Order                           form !\n"
+" Please set one before choosing a product."
+msgstr "¡Tiene que seleccionar una tarifa en el formulario del parte de trabajo!\n"
+" Por favor, indique una antes de elegir un producto."
+
+#. module: work_order
+#: code:addons/addons/work_order/work_order/models/work_order_service.py:226
+#: code:addons/work_order/models/work_order_service.py:226
+#, python-format
+msgid "You have to select a pricelist in the Work Order                       form !\n"
+" Please set one before choosing a product."
+msgstr "¡Tiene que seleccionar una tarifa en el formulario del parte de trabajo!
+ Por favor, indique una antes de elegir un producto."
+
+#. module: work_order
+#: model_terms:ir.ui.view,arch_db:work_order.view_work_order_form
+msgid "hours"
+msgstr "horas"

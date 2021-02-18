@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="product_template_form_view" model="ir.ui.view">
+    <field name="name">product.template.work.order.form</field>
+    <field name="model">product.template</field>
+    <field name="priority" eval="8"/>
+    <field name="inherit_id" ref="product.product_template_form_view"/>
+    <field name="arch" type="xml">
+      <field name="sale_ok" position="before">
+        <field name="installable" attrs="{'invisible': [('type', '!=', 'service')]}"/>
+        <label for="installable" attrs="{'invisible': [('type', '!=', 'service')]}"/>
+        <br attrs="{'invisible': [('type', '!=', 'service')]}"/>
+      </field>
+      <!-- <xpath expr="//page[@name='sales']" position="inside"> <div name="work_order" attrs="{'invisible': [('type', '!=', 'service')]}"> <div> <field name="installable"/> <label for="installable"/> </div> </div> </xpath> -->
+      <xpath expr="//page[@name='sales']/group" position="inside">
+        <group>
+          <xpath expr="//field[@name='invoicing_policy']" position="after">
+            <group>
+              <field name="work_order_tracking" attrs="{'invisible': [ '|', ('type', '!=', 'service'), ('installable', '=', False)]}" widget="radio"/>
+            </group>
+          </xpath>
+        </group>
+      </xpath>
+    </field>
+  </record>
+</odoo>

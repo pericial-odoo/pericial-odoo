@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+<record id="view_work_order_category_tree" model="ir.ui.view">
+    <field name="name">view.work.order.category.tree</field>
+    <field name="model">work.order.category</field>
+    <field name="arch" type="xml">
+        <tree string="Categories">
+            <field name="name" />
+            <field name="notes" />
+            <field name="invoice_method" groups="work_order.group_work_order_category_invoice"/>
+            <field name="id" invisible="1"/>
+            <field name="team_ids" widget="many2many_tags" options="{'no_create_edit': True}" />
+            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+        </tree>
+    </field>
+</record>
+
+<record id="view_work_order_category_form" model="ir.ui.view">
+<field name="name">view.work.order.category.form</field>
+<field name="model">work.order.category</field>
+<field name="arch" type="xml">
+<form string="Categories">
+    <sheet>
+        <group name="Categories">
+          <field name="name" />
+          <field name="notes" />
+          <field name="invoice_method" groups="work_order.group_work_order_category_invoice"/>
+          <field name="id" invisible="1"/>
+          <field name="team_ids" widget="many2many_tags" options="{'no_create_edit': True}" />
+          <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+        </group>
+    </sheet>
+</form>
+</field>
+</record>
+</odoo>

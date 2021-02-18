@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="work_order_kanban_view" model="ir.ui.view">
+        <field name="name">work.order.team.kanban</field>
+        <field name="model">work.order.team</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_maintenance_team_kanban" create="0">
+                <field name="name"/>
+                <field name="color"/>
+                <field name="todo_work_order_ids"/>
+                <field name="todo_work_order_count"/>
+                <field name="todo_work_order_count_date"/>
+                <field name="todo_work_order_count_high_priority"/>
+                <field name="todo_work_order_count_unscheduled"/>
+                <field name="todo_count_2binvoiced"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="#{kanban_color(record.color.raw_value)}" name="work_order">
+                            <div>
+                                <div t-attf-class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary">
+                                            <a name="%(action_work_order_tree_from_dashboard)d" type="action">
+                                                <field name="name"/>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_manage_button_section">
+                                        <a class="o_kanban_manage_toggle_button" href="#">
+                                            <i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content">
+                                    <div class="row">
+                                        <div class="col-6 o_kanban_primary_left">
+                                            <button class="btn btn-primary"
+                                                    name="%(action_work_order_tree_from_dashboard)d" type="action"
+                                                    context="{'search_default_current': 1, 'search_default_in_process':1}">
+                                                <t t-esc="record.todo_work_order_count.value" />
+                                                To Do
+                                            </button>
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_right">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <a name="%(action_work_order_calendar_from_dashboard)d"
+                                                       type="action"
+                                                       context="{'search_default_scheduled': 1, 'search_default_todo': 1}">
+                                                        Scheduled
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="todo_work_order_count_date"/>
+                                                </div>
+                                                <div class="col-9">
+                                                    <a name="%(action_work_order_tree_from_dashboard)d"
+                                                       type="action"
+                                                       context="{'search_default_unscheduled': 1, 'search_default_todo': 1}">
+                                                        Unscheduled
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="todo_work_order_count_unscheduled"/>
+                                                </div>
+                                                <div class="col-9">
+                                                    <a name="%(action_work_order_tree_from_dashboard)d"
+                                                       type="action"
+                                                       context="{'search_default_top_priority': 1, 'search_default_todo': 1}">
+                                                        Top Priorities
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="todo_work_order_count_high_priority"/>
+                                                </div>
+                                                <div class="col-9">
+                                                    <a name="%(action_work_order_tree_from_dashboard)d"
+                                                       type="action"
+                                                       context="{'search_default_2binvoiced': 1}">
+                                                        To be invoiced
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <field name="todo_count_2binvoiced"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                    <div class="row">
+                                        <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                            <div class="o_kanban_card_manage_title">
+                                                <span>View</span>
+                                            </div>
+                                            <div>
+                                                <a name="%(action_work_order_tree_from_dashboard)d" type="action">
+                                                    All
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_new">
+                                            <div class="o_kanban_card_manage_title">
+                                                <span>Reporting</span>
+                                            </div>
+                                            <div>
+                                                <a name="%(action_work_order_reports)d" type="action"
+                                                   context="{'search_default_maintenance_team_id': active_id}">
+                                                    Work orders
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                        <div class="col-8" role="menuitem" aria-haspopup="true">
+                                            <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                        </div>
+                                        <!-- <div role="menuitem" class="col-4 text-center">
+                                            <a name="%(work_order_team_settings_action)d" type="action" >Settings</a>
+                                        </div> -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
